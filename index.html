@@ -78,6 +78,7 @@
         <p>Здесь вы можете скачать все необходимые моды</p>
         <p class="server-ip" onclick="copyToClipboard(this)">IP: gp42.aternos.me</p>
         <a class="button" href="#" id="modsLink">Скачать моды</a>
+        <button class="button" onclick="startServer()">Запустить сервер</button>
         <p class="version">Версия 1.20.1</p>
     </div>
     
@@ -89,6 +90,30 @@
             navigator.clipboard.writeText(text).then(() => {
                 alert("IP-адрес скопирован: " + text);
             });
+        }
+        
+        async function startServer() {
+            const serverId = "#sf6ZG0ihH7L2hhtd";
+            const session = "LLpMcoxXQ8PrCqzTdoKGeNTarEFIMvNwc00znbBLQda48qPqnxGjOu5uQWK4txrJyIFNJRG4xSj5EyQAivlpX4AIrYvvEI1KaWbj";
+
+            const url = `https://aternos.org/panel/ajax/start.php?server=${serverId}`;
+            const headers = {
+                "Cookie": `SESSION=${session}`,
+                "Content-Type": "application/json"
+            };
+
+            try {
+                let response = await fetch(url, { method: "GET", headers: headers });
+                let result = await response.json();
+                if (result.success) {
+                    alert("Сервер успешно запущен!");
+                } else {
+                    alert("Ошибка запуска сервера!");
+                }
+            } catch (error) {
+                console.error("Ошибка:", error);
+                alert("Произошла ошибка!");
+            }
         }
     </script>
 </body>
