@@ -121,12 +121,10 @@
         <a class="button" id="modsLink" href="https://drive.google.com/file/d/1mhpKC7Na7HC1Cb6glrkI1Jv-KK2I2qDL/view?usp=drive_link" target="_blank">Скачать моды</a>
         <a class="button discord-button" href="https://discord.gg/p48tDMwVw6" target="_blank">Дискорд насрал</a>
 
-        <!-- Предупреждение про OptiFine -->
         <div class="warning">Моды с OptiFine работать не будут :(</div>
 
         <p class="version">Версия 1.20.1</p>
 
-        <!-- Тумблер и контент -->
         <div class="toggle-container">
             <button class="toggle-button active" onclick="showContent('news')">Новости сервера</button>
             <button class="toggle-button" onclick="showContent('updates')">Обновления сервера</button>
@@ -140,30 +138,5 @@
             <p>Здесь будут отображаться последние обновления сервера.</p>
         </div>
     </div>
-    
-    <script>
-        function copyToClipboard(element) {
-            const text = element.innerText.replace("IP: ", "");
-            navigator.clipboard.writeText(text).then(() => {
-                alert("IP-адрес скопирован: " + text);
-            });
-        }
-
-        function showContent(contentId) {
-            // Скрываем весь контент
-            document.querySelectorAll('.content').forEach(content => {
-                content.classList.remove('active');
-            });
-
-            // Убираем активный класс у всех кнопок
-            document.querySelectorAll('.toggle-button').forEach(button => {
-                button.classList.remove('active');
-            });
-
-            // Показываем выбранный контент и делаем кнопку активной
-            document.getElementById(contentId).classList.add('active');
-            document.querySelector(`[onclick="showContent('${contentId}')"]`).classList.add('active');
-        }
-    </script>
 </body>
 </html>
