@@ -14,7 +14,7 @@
             color: white;
             margin: 0;
             padding: 0;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -27,6 +27,8 @@
         }
         .container {
             margin-top: 50px;
+            width: 90%;
+            max-width: 1200px;
         }
         .button {
             display: inline-block;
@@ -111,6 +113,97 @@
         .content.active {
             display: block;
         }
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .news-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .news-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+        .news-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        .news-item h3 {
+            padding: 10px;
+            margin: 0;
+            font-size: 1.2em;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .modal-media {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .modal-media img, .modal-media video {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .modal-content h2 {
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+        .modal-content p {
+            margin: 10px 0;
+            font-size: 1.1em;
+            line-height: 1.5;
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #6200ea;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .close-button:hover {
+            background: #3700b3;
+        }
     </style>
 </head>
 <body>
@@ -121,8 +214,7 @@
         <a class="button" id="modsLink" href="https://drive.google.com/file/d/1mhpKC7Na7HC1Cb6glrkI1Jv-KK2I2qDL/view?usp=drive_link" target="_blank">Скачать моды</a>
         <a class="button discord-button" href="https://discord.gg/p48tDMwVw6" target="_blank">Дискорд насрал</a>
 
-        <!-- Предупреждение о OptiFine -->
-        <div class="warning">Моды с OptiFine работать не будут! </div>
+        <div class="warning">Внимание: Моды с OptiFine работать не будут! Используйте альтернативные решения для оптимизации.</div>
 
         <p class="version">Версия 1.20.1</p>
 
@@ -130,13 +222,66 @@
             <button class="toggle-button active" onclick="showContent('news')">Новости сервера</button>
             <button class="toggle-button" onclick="showContent('updates')">Обновления сервера</button>
         </div>
+
+        <!-- Новости -->
         <div id="news" class="content active">
             <h2>Новости (ГОВОРИМ О ГЛАВНОМ)</h2>
-            <p>Здесь будут отображаться последние новости сервера.</p>
+            <div class="news-grid">
+                <div class="news-item" onclick="openModal('modal1')">
+                    <img src="https://via.placeholder.com/300x150" alt="Новость 1">
+                    <h3>Новость 1</h3>
+                </div>
+                <div class="news-item" onclick="openModal('modal2')">
+                    <img src="https://via.placeholder.com/300x150" alt="Новость 2">
+                    <h3>Новость 2</h3>
+                </div>
+                <div class="news-item" onclick="openModal('modal3')">
+                    <img src="https://via.placeholder.com/300x150" alt="Новость 3">
+                    <h3>Новость 3</h3>
+                </div>
+            </div>
         </div>
+
+        <!-- Обновления -->
         <div id="updates" class="content">
             <h2>Обновления сервера</h2>
             <p>Здесь будут отображаться последние обновления сервера.</p>
+        </div>
+    </div>
+
+    <!-- Модальные окна для новостей -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <button class="close-button" onclick="closeModal('modal1')">&times;</button>
+            <div class="modal-media">
+                <img src="https://via.placeholder.com/400x200" alt="Дополнительное изображение 1">
+                <video controls>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    Ваш браузер не поддерживает видео.
+                </video>
+            </div>
+            <h2>Новость 1</h2>
+            <p>Описание новости 1. Здесь может быть много текста и дополнительных медиа. Например, рассказываем о новых функциях сервера, событиях или обновлениях.</p>
+        </div>
+    </div>
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <button class="close-button" onclick="closeModal('modal2')">&times;</button>
+            <div class="modal-media">
+                <img src="https://via.placeholder.com/400x200" alt="Дополнительное изображение 2">
+            </div>
+            <h2>Новость 2</h2>
+            <p>Описание новости 2. Здесь может быть много текста и дополнительных медиа. Например, рассказываем о новых функциях сервера, событиях или обновлениях.</p>
+        </div>
+    </div>
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <button class="close-button" onclick="closeModal('modal3')">&times;</button>
+            <div class="modal-media">
+                <img src="https://via.placeholder.com/400x200" alt="Дополнительное изображение 3">
+            </div>
+            <h2>Новость 3</h2>
+            <p>Описание новости 3. Здесь может быть много текста и дополнительных медиа. Например, рассказываем о новых функциях сервера, событиях или обновлениях.</p>
         </div>
     </div>
 
@@ -163,6 +308,14 @@
 
             document.getElementById(id).classList.add('active');
             document.querySelector(`[onclick="showContent('${id}')"]`).classList.add('active');
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
         }
     </script>
 </body>
