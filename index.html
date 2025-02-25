@@ -121,7 +121,8 @@
         <a class="button" id="modsLink" href="https://drive.google.com/file/d/1mhpKC7Na7HC1Cb6glrkI1Jv-KK2I2qDL/view?usp=drive_link" target="_blank">Скачать моды</a>
         <a class="button discord-button" href="https://discord.gg/p48tDMwVw6" target="_blank">Дискорд насрал</a>
 
-        <div class="warning">Моды с OptiFine работать не будут :(</div>
+        <!-- Предупреждение о OptiFine -->
+        <div class="warning">Моды с OptiFine работать не будут! </div>
 
         <p class="version">Версия 1.20.1</p>
 
@@ -138,5 +139,31 @@
             <p>Здесь будут отображаться последние обновления сервера.</p>
         </div>
     </div>
+
+    <script>
+        function copyToClipboard(element) {
+            const text = element.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('IP скопирован: ' + text);
+            }).catch(err => {
+                console.error('Ошибка копирования: ', err);
+            });
+        }
+
+        function showContent(id) {
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            const buttons = document.querySelectorAll('.toggle-button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            document.getElementById(id).classList.add('active');
+            document.querySelector(`[onclick="showContent('${id}')"]`).classList.add('active');
+        }
+    </script>
 </body>
 </html>
